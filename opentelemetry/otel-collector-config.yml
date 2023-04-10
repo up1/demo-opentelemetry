@@ -1,0 +1,14 @@
+receivers:
+  redis:
+    endpoint: "redis:6379"
+    collection_interval: 10s
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:9123"
+
+service:
+  pipelines:
+    metrics/redis:
+      receivers: [redis]
+      exporters: [prometheus]

@@ -1,0 +1,19 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./otel-collector-config.yml:/etc/otel-collector-config.yml
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus-config.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
